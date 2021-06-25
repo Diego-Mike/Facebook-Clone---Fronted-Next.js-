@@ -32,14 +32,14 @@ const Perfil = ({ data: urlIdData, allPubs }) => {
     setUserAuth(auth);
   }, []);
 
-  const { data }: IuserData = useSWR<user>(
+  const { data }  = useSWR<user>(
     `${process.env.URL}/api/user/singleU/${router}`,
     {
       initialData: urlIdData
     }
   );
 
-  const { data: Publications }: thePublication = useSWR<Ipublication[]>(
+  const { data: Publications } = useSWR<Ipublication[]>(
     `${process.env.URL}/api/publication`,
     {
       initialData: allPubs,
@@ -107,7 +107,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { data }: IuserData = await Axios.get(
+  const { data }:  = await Axios.get(
     `${process.env.URL}/api/user/singleU/${params.id}`
   );
 

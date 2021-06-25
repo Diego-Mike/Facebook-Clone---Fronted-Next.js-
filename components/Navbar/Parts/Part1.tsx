@@ -58,7 +58,7 @@ const Part1: React.FC<IPart1Props> = ({
     setUserId(auth);
   }, []);
 
-  const { data }: multipleUsers = useSWR<user[]>(
+  const { data } = useSWR<user[]>(
     () => `${process.env.URL}/api/user/allU/${userId.user.id}`,
     { revalidateOnFocus: false }
   );

@@ -20,7 +20,7 @@ interface IrightSideBarProps {
 const RightSideBart: React.FC<IrightSideBarProps> = ({ UserId }) => {
   const router = useRouter();
 
-  const { data: DataUser }: IuserData = useSWR<user>(
+  const { data: DataUser } = useSWR<user>(
     () => `${process.env.URL}/api/user/singleU/${UserId.user.id}`
   );
 

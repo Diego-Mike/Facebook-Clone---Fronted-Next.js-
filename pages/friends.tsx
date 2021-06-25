@@ -6,7 +6,7 @@ import useSWR from "swr";
 import Private from "../components/Private/Private";
 import LookForFriends from "../components/Friends/LookForFriends";
 import { dataObject } from "../GlobalInterfaces/AuthContextInterfaces";
-import { multipleUsers, user } from "../GlobalInterfaces/DataInterfaces";
+import { user } from "../GlobalInterfaces/DataInterfaces";
 import { GetStaticProps } from "next";
 
 const Friends = ({ initialAllUsers }) => {
@@ -19,7 +19,7 @@ const Friends = ({ initialAllUsers }) => {
 
   // All users and user on screen
 
-  const { data: AllUsers }: multipleUsers = useSWR<user[]>(
+  const { data: AllUsers } = useSWR<user[]>(
     () => `${process.env.URL}/api/user`,
     {
       initialData: initialAllUsers

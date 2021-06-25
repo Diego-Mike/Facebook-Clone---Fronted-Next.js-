@@ -27,7 +27,7 @@ const CreatePubs = () => {
     setUserAuth(auth);
   }, []);
 
-  const { data: CurrentUser }: IuserData = useSWR<user>(
+  const { data: CurrentUser } = useSWR<user>(
     () => `http://localhost:5000/api/user/singleU/${userAuth.user.id}`
   );
 

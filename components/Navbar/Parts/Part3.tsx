@@ -73,7 +73,7 @@ const Part3: React.FC<IPar2Props> = ({
     setUserId(auth);
   }, []);
 
-  const { data }: IuserData = useSWR<user>(
+  const { data } = useSWR<user>(
     () => `${process.env.URL}/api/user/singleU/${userId.user.id}`
   );
 

@@ -13,7 +13,7 @@ import CreatePubs from "../../Pubs/CreatePubs/CreatePubs";
 const PublicationsHome = ({ data: allPubs }) => {
   // All pubs
 
-  const { data: Publications }: thePublication = useSWR<Ipublication>(
+  const { data: Publications } = useSWR<Ipublication[]>(
     `${process.env.URL}/api/publication`,
     {
       initialData: allPubs,
