@@ -115,7 +115,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: { data, allPubs },
-    revalidate: 5
+    revalidate: 3
   };
 };
 
