@@ -1,7 +1,6 @@
 import axios, { AxiosRequestConfig } from "axios";
 
-export const URL: string =
-  process.env.URL || "https://facebook-project-ts.herokuapp.com";
+export const URL: string = "https://facebook-project-ts.herokuapp.com";
 
 const API = axios.create({ baseURL: `${URL}/api` });
 
