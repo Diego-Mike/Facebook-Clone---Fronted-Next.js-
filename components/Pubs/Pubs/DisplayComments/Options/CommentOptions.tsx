@@ -17,9 +17,14 @@ import EditComment from "./EditComment/EditComment";
 interface ICommentOptions {
   Comment: theComment;
   Publication: Ipublication;
+  Publications: Ipublication[];
 }
 
-const CommentOptions: FC<ICommentOptions> = ({ Comment, Publication }) => {
+const CommentOptions: FC<ICommentOptions> = ({
+  Comment,
+  Publication,
+  Publications
+}) => {
   const [modalOptions, setModalOptions] = useState<boolean>(false);
   const [chooseOption, setChooseOption] = useState<boolean>(true);
   const [deleteComment, setDeleteComment] = useState<boolean>(false);
@@ -122,6 +127,7 @@ const CommentOptions: FC<ICommentOptions> = ({ Comment, Publication }) => {
               setChooseOption={setChooseOption}
               setDeleteComment={setDeleteComment}
               setModalOptions={setModalOptions}
+              Publications={Publications}
             />
           )}
 
@@ -134,6 +140,7 @@ const CommentOptions: FC<ICommentOptions> = ({ Comment, Publication }) => {
               setModalOptions={setModalOptions}
               Comment={Comment}
               Publication={Publication}
+              Publications={Publications}
             />
           )}
         </CommentOptionsHero>

@@ -18,9 +18,13 @@ import { like, URL } from "../../../../API/Calls";
 
 interface IlikesCommentsProps {
   publication: Ipublication;
+  Publications: Ipublication[];
 }
 
-const LikesComments: React.FC<IlikesCommentsProps> = ({ publication }) => {
+const LikesComments: React.FC<IlikesCommentsProps> = ({
+  publication,
+  Publications
+}) => {
   const router = useRouter();
 
   const [userAuth, setUserAuth] = useState<dataObject>({});
@@ -35,7 +39,8 @@ const LikesComments: React.FC<IlikesCommentsProps> = ({ publication }) => {
     if (publication.likes.find(f => f.identifier === userAuth.user.id)) {
       mutate(
         `${URL}/api/publication`,
-        (allPublications: Ipublication[]) => {
+        (allPublications: Ipublication[] = Publications) => {
+          console.log(Publications);
           if (allPublications) {
             const currentPub = allPublications.find(f => f === publication);
 
@@ -57,7 +62,8 @@ const LikesComments: React.FC<IlikesCommentsProps> = ({ publication }) => {
     } else {
       mutate(
         `${URL}/api/publication`,
-        (allPublications: Ipublication[]) => {
+        (allPublications: Ipublication[] = Publications) => {
+          console.log(allPublications);
           if (allPublications) {
             const currentPub = allPublications.find(f => f === publication);
 
@@ -85,7 +91,7 @@ const LikesComments: React.FC<IlikesCommentsProps> = ({ publication }) => {
     // Check cache data is right
     mutate(
       `${URL}/api/publication`,
-      async (allPublications: Ipublication[]) => {
+      async (allPublications: Ipublication[] = Publications) => {
         try {
           const { data } = await like(
             { identifier: userAuth.user.id },

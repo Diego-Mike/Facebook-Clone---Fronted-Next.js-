@@ -6,7 +6,8 @@ import { motion } from "framer-motion";
 const RightBarResponsive = {
   responsive1: "@media screen and (max-width: 1100px)",
   responsive2: "@media screen and (max-width: 1020px)",
-  responsive3: "@media screen and (max-width: 950px)"
+  responsive3: "@media screen and (max-width: 950px)",
+  responsive4: "@media screen and (max-width: 900px)"
 };
 
 //
@@ -42,6 +43,10 @@ ${RightBarResponsive.responsive2}{
 
 ${RightBarResponsive.responsive3}{
     width: 27%;
+}
+
+${RightBarResponsive.responsive4}{
+    display: none;
 }
 
 `;

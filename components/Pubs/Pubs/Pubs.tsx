@@ -24,9 +24,10 @@ import PhotoFullScreen from "../../PhotoFullScreen/PhotoFullScreen";
 
 interface IpubsProps {
   publication: Ipublication;
+  Publications: Ipublication[];
 }
 
-const Pubs: React.FC<IpubsProps> = ({ publication }) => {
+const Pubs: React.FC<IpubsProps> = ({ publication, Publications }) => {
   const router = useRouter();
 
   const [userId, setUserId] = useState<dataObject>({});
@@ -132,7 +133,7 @@ const Pubs: React.FC<IpubsProps> = ({ publication }) => {
             {userId &&
               userId.user &&
               userId.user.id === publication.creator.identifier && (
-                <PubOptions publication={publication} UserId={userId.user.id} />
+                <PubOptions publication={publication} UserId={userId.user.id} Publications={Publications} />
               )}
           </PubHeaderUser>
         </PubHeader>
@@ -168,9 +169,12 @@ const Pubs: React.FC<IpubsProps> = ({ publication }) => {
           </PubImage>
         )}
         {/* Comments - likes */}
-        <LikesComments publication={publication} />
+        <LikesComments Publications={Publications} publication={publication} />
         {/* Display comments */}
-        <DisplayComments publication={publication} />
+        <DisplayComments
+          publication={publication}
+          Publications={Publications}
+        />
       </PubHero>
 
       {/* Big screen */}

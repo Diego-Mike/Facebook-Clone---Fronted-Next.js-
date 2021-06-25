@@ -18,18 +18,20 @@ interface IdeletePub {
   pubId: string;
   UserId: string;
   setDeleteLayout: React.Dispatch<SetStateAction<boolean>>;
+  Publications: Ipublication[];
 }
 
 const DeletePub: React.FC<IdeletePub> = ({
   pubId,
   UserId,
-  setDeleteLayout
+  setDeleteLayout,
+  Publications
 }) => {
   const DeletePub = async (): Promise<void> => {
     try {
       mutate(
         `${URL}/api/publication`,
-        (allPublications: Ipublication[]) => {
+        (allPublications: Ipublication[] = Publications) => {
           if (allPublications) {
             const deleteThePub: Ipublication[] = allPublications.filter(
               filt => filt._id !== pubId

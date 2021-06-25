@@ -1,6 +1,4 @@
 import styles from "styled-components";
-import axios from "axios";
-import useSWR from "swr";
 import { FC } from "react";
 
 import Pubs from "../../Pubs/Pubs/Pubs";
@@ -99,7 +97,13 @@ ${PublicationResponsive.responsive9}{
             <CreatePubs />
             {/* Show pub */}
             {Publications.map(publication => {
-              return <Pubs key={publication._id} publication={publication} />;
+              return (
+                <Pubs
+                  key={publication._id}
+                  publication={publication}
+                  Publications={Publications}
+                />
+              );
             })}
           </PublicationsHomeHero>
         </>

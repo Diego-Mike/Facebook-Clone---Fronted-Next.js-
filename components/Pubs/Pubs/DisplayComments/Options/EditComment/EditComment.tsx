@@ -30,6 +30,7 @@ interface IEditComment {
   setEditComment: Dispatch<SetStateAction<boolean>>;
   Comment: theComment;
   Publication: Ipublication;
+  Publications: Ipublication[];
 }
 
 const EditComment: FC<IEditComment> = ({
@@ -37,7 +38,8 @@ const EditComment: FC<IEditComment> = ({
   setEditComment,
   setModalOptions,
   Comment,
-  Publication
+  Publication,
+  Publications
 }) => {
   const router = useRouter();
 
@@ -50,7 +52,7 @@ const EditComment: FC<IEditComment> = ({
   const HandleEditComment = async (): Promise<void> => {
     mutate(
       `${URL}/api/publication`,
-      (allPubs: Ipublication[]) => {
+      (allPubs: Ipublication[] = Publications) => {
         if (allPubs) {
           const currentPub = allPubs.find(f => f === Publication);
 
@@ -84,7 +86,7 @@ const EditComment: FC<IEditComment> = ({
 
     mutate(
       `${URL}/api/publication`,
-      async (allPubs: Ipublication[]) => {
+      async (allPubs: Ipublication[] = Publications) => {
         try {
           const { data } = await editComment(
             {

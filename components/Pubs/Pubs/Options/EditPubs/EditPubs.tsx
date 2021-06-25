@@ -31,12 +31,14 @@ interface IEditPubs {
   identifier: string;
   publication: Ipublication;
   setEditPublication: Dispatch<SetStateAction<boolean>>;
+  Publications: Ipublication[];
 }
 
 const EditPubs: FC<IEditPubs> = ({
   identifier,
   publication,
-  setEditPublication
+  setEditPublication,
+  Publications
 }) => {
   const router = useRouter();
 
@@ -51,7 +53,7 @@ const EditPubs: FC<IEditPubs> = ({
   const handleSubmit = async (): Promise<void> => {
     mutate(
       `${URL}/api/publication`,
-      (allPubs: Ipublication[]) => {
+      (allPubs: Ipublication[] = Publications) => {
         if (allPubs) {
           const currentPub = allPubs.find(f => f === publication);
 
@@ -80,7 +82,7 @@ const EditPubs: FC<IEditPubs> = ({
 
     mutate(
       `${URL}/api/publication`,
-      async (allPubs: Ipublication[]) => {
+      async (allPubs: Ipublication[] = Publications) => {
         try {
           const { data } = await editPub(editThePublication, publication._id);
 

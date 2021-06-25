@@ -1,6 +1,6 @@
 import { AnimatePresence } from "framer-motion";
 import React, { useState, MouseEvent } from "react";
-import {useMediaQuery} from 'react-responsive'
+import { useMediaQuery } from "react-responsive";
 
 import {
   PubHeaderOptions,
@@ -19,14 +19,19 @@ import EditPubs from "./EditPubs/EditPubs";
 interface IpubOptions {
   UserId: string;
   publication: Ipublication;
+  Publications: Ipublication[];
 }
 
-const PubOptions: React.FC<IpubOptions> = ({ UserId, publication }) => {
+const PubOptions: React.FC<IpubOptions> = ({
+  UserId,
+  publication,
+  Publications
+}) => {
   const [showOptions, setShowOptions] = useState<boolean>(false);
   const [deleteLayout, setDeleteLayout] = useState<boolean>(false);
   const [editPublication, setEditPublication] = useState<boolean>(false);
 
-  const changeAnimation = useMediaQuery({query: '(max-width: 630px)'})
+  const changeAnimation = useMediaQuery({ query: "(max-width: 630px)" });
 
   // Framer motion - PopUp
 
@@ -39,7 +44,7 @@ const PubOptions: React.FC<IpubOptions> = ({ UserId, publication }) => {
   const PopUp2 = {
     hidden: { opacity: 0, y: 45 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
-    exit: { opacity: 0}
+    exit: { opacity: 0 }
   };
 
   return (
@@ -100,6 +105,7 @@ const PubOptions: React.FC<IpubOptions> = ({ UserId, publication }) => {
           pubId={publication._id}
           UserId={UserId}
           setDeleteLayout={setDeleteLayout}
+          Publications={Publications}
         />
       )}
       {/* Edit pub */}
@@ -108,6 +114,7 @@ const PubOptions: React.FC<IpubOptions> = ({ UserId, publication }) => {
           publication={publication}
           identifier={UserId}
           setEditPublication={setEditPublication}
+          Publications={Publications}
         />
       )}
     </>

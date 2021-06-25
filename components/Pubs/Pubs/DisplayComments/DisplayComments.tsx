@@ -33,9 +33,13 @@ import CommentOptions from "./Options/CommentOptions";
 
 interface IcreateComments {
   publication: Ipublication;
+  Publications: Ipublication[];
 }
 
-const CreateComments: React.FC<IcreateComments> = ({ publication }) => {
+const CreateComments: React.FC<IcreateComments> = ({
+  publication,
+  Publications
+}) => {
   const router = useRouter();
 
   const [userAuth, setUserAuth] = useState<dataObject>({});
@@ -57,7 +61,7 @@ const CreateComments: React.FC<IcreateComments> = ({ publication }) => {
     ) {
       mutate(
         `${URL}/api/publication`,
-        (allPubs: Ipublication[]) => {
+        (allPubs: Ipublication[] = Publications) => {
           if (allPubs) {
             const currentPub = allPubs.find(f => f === publication);
 
@@ -82,12 +86,12 @@ const CreateComments: React.FC<IcreateComments> = ({ publication }) => {
             }
           }
         },
-        false 
+        false
       );
     } else {
       mutate(
         `${URL}/api/publication`,
-        (allPubs: Ipublication[]) => {
+        (allPubs: Ipublication[] = Publications) => {
           if (allPubs) {
             const currentPub = allPubs.find(f => f === publication);
 
@@ -119,7 +123,7 @@ const CreateComments: React.FC<IcreateComments> = ({ publication }) => {
 
     mutate(
       `${URL}/api/publication`,
-      async (allPubs: Ipublication[]) => {
+      async (allPubs: Ipublication[] = Publications) => {
         try {
           const { data } = await likeComment(
             {
@@ -152,7 +156,7 @@ const CreateComments: React.FC<IcreateComments> = ({ publication }) => {
 
     mutate(
       `${URL}/api/publication`,
-      (allPubs: Ipublication[]) => {
+      (allPubs: Ipublication[] = Publications) => {
         if (allPubs) {
           const currentPub = allPubs.find(f => f === publication);
 
@@ -185,7 +189,7 @@ const CreateComments: React.FC<IcreateComments> = ({ publication }) => {
     mutate(
       `${URL}/api/publication`,
 
-      async (allPubs: Ipublication[]) => {
+      async (allPubs: Ipublication[] = Publications) => {
         try {
           const { data } = await createComment(
             { identifier: userAuth.user.id, body: commentBody },
@@ -276,6 +280,7 @@ const CreateComments: React.FC<IcreateComments> = ({ publication }) => {
                         <CommentOptions
                           Comment={comment}
                           Publication={publication}
+                          Publications={Publications}
                         />
                       )}
                   </ContainGridSettings>

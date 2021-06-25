@@ -22,6 +22,9 @@ margin-top: 6rem;
 
 z-index: 50;
 
+@media screen and (max-width: 1100px){
+    display: none;
+}
 
 `;
 

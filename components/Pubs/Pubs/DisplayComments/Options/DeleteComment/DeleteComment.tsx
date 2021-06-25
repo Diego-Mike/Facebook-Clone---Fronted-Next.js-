@@ -21,6 +21,7 @@ interface IDeleteComment {
   setModalOptions: Dispatch<SetStateAction<boolean>>;
   setChooseOption: Dispatch<SetStateAction<boolean>>;
   setDeleteComment: Dispatch<SetStateAction<boolean>>;
+  Publications: Ipublication[];
 }
 
 const DeleteComment: React.FC<IDeleteComment> = ({
@@ -29,7 +30,8 @@ const DeleteComment: React.FC<IDeleteComment> = ({
   commentId,
   setModalOptions,
   setChooseOption,
-  setDeleteComment
+  setDeleteComment,
+  Publications
 }) => {
   const router = useRouter();
 
@@ -38,7 +40,7 @@ const DeleteComment: React.FC<IDeleteComment> = ({
   const DeleteComment = (): void => {
     mutate(
       `${URL}/api/publication`,
-      (allPublications: Ipublication[]) => {
+      (allPublications: Ipublication[] = Publications) => {
         if (allPublications) {
           const currentPub = allPublications.find(({ _id }) => _id === pubId);
           if (currentPub) {
@@ -64,7 +66,7 @@ const DeleteComment: React.FC<IDeleteComment> = ({
 
     mutate(
       `${URL}/api/publication`,
-      async (allPubs: Ipublication[]) => {
+      async (allPubs: Ipublication[] = Publications) => {
         try {
           const { data: newPub } = await deleteComment(
             {

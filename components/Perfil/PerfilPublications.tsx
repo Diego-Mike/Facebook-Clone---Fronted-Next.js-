@@ -99,7 +99,13 @@ const PerfilPublications: FC<IPerfilPubs> = ({
             {Publications.filter(
               ({ creator }) => creator.identifier === router.query.id
             ).map(publication => {
-              return <Pubs key={publication._id} publication={publication} />;
+              return (
+                <Pubs
+                  key={publication._id}
+                  publication={publication}
+                  Publications={Publications}
+                />
+              );
             })}
           </UserPublications>
         </>

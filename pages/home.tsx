@@ -1,6 +1,5 @@
 import Head from "next/head";
 import { useState, useEffect } from "react";
-import { useMediaQuery } from "react-responsive";
 import useSWR from "swr";
 import axios from "axios";
 import { GetStaticProps } from "next";
@@ -31,9 +30,6 @@ const Home = ({ data: allPubs }) => {
     }
   );
 
-  const cutLeftColumn = useMediaQuery({ query: "(max-width: 1100px)" });
-  const cutRighttColumn = useMediaQuery({ query: "(max-width: 900px)" });
-
   return (
     <div>
       {userAuth ? (
@@ -43,9 +39,7 @@ const Home = ({ data: allPubs }) => {
           </Head>
           {/* Left sidebar */}
 
-          {cutLeftColumn ? null : (
-            <LeftSideBar UserId={userAuth !== undefined && userAuth} />
-          )}
+          <LeftSideBar UserId={userAuth !== undefined && userAuth} />
 
           {/* Publicaciones */}
 
@@ -53,9 +47,7 @@ const Home = ({ data: allPubs }) => {
 
           {/* Right sidebar */}
 
-          {cutRighttColumn ? null : (
-            <RightSideBar UserId={userAuth !== undefined && userAuth} />
-          )}
+          <RightSideBar UserId={userAuth !== undefined && userAuth} />
         </>
       ) : (
         <>
