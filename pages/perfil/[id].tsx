@@ -8,7 +8,9 @@ import useSWR from "swr";
 import {
   IuserData,
   multipleUsers,
-  thePublication
+  thePublication,
+  user,
+  Ipublication
 } from "../../GlobalInterfaces/DataInterfaces";
 import PerfilPhotos from "../../components/Perfil/PerfilPhotos";
 import Private from "../../components/Private/Private";
@@ -30,14 +32,14 @@ const Perfil = ({ data: urlIdData, allPubs }) => {
     setUserAuth(auth);
   }, []);
 
-  const { data }: IuserData = useSWR(
+  const { data }: IuserData = useSWR<user>(
     `${process.env.URL}/api/user/singleU/${router}`,
     {
       initialData: urlIdData
     }
   );
 
-  const { data: Publications }: thePublication = useSWR(
+  const { data: Publications }: thePublication = useSWR<Ipublication[]>(
     `${process.env.URL}/api/publication`,
     {
       initialData: allPubs,

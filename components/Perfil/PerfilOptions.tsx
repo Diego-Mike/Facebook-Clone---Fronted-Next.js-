@@ -60,7 +60,7 @@ const PerfilOptions: React.FC<IperfilOptions> = ({
     setUserAuth(auth);
   }, []);
 
-  const { data: userOnScreen }: IuserData = useSWR(
+  const { data: userOnScreen }: IuserData = useSWR<user>(
     () => `${process.env.URL}/api/user/singleU/${userAuth.user.id}`
   );
 

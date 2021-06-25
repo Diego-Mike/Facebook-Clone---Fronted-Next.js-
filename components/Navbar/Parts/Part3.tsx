@@ -40,7 +40,7 @@ import {
   LOGOUT
 } from "../../../GlobalInterfaces/AuthContextInterfaces";
 import DefaultUser from "../../../public/defaultUser.svg";
-import { IuserData } from "../../../GlobalInterfaces/DataInterfaces";
+import { IuserData, user } from "../../../GlobalInterfaces/DataInterfaces";
 import { useState, useEffect, SetStateAction, SyntheticEvent } from "react";
 import { AuthActions } from "../../../context/AuthContext";
 import { DeleteNotificationOrFriend, AddAsFriend } from "../../../API/Calls";
@@ -73,7 +73,7 @@ const Part3: React.FC<IPar2Props> = ({
     setUserId(auth);
   }, []);
 
-  const { data }: IuserData = useSWR(
+  const { data }: IuserData = useSWR<user>(
     () => `${process.env.URL}/api/user/singleU/${userId.user.id}`
   );
 

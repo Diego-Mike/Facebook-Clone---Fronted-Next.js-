@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import useSWR from "swr";
 import { useRouter } from "next/router";
-import {useMediaQuery} from 'react-responsive'
+import { useMediaQuery } from "react-responsive";
 
 import {
   CreatePubHero,
@@ -12,7 +12,7 @@ import {
 } from "./CreatepubStyled";
 import DefaultUser from "../../../public/defaultUser.svg";
 import PhotoVideo from "../../../public/photo-video.svg";
-import { IuserData } from "../../../GlobalInterfaces/DataInterfaces";
+import { IuserData, user } from "../../../GlobalInterfaces/DataInterfaces";
 import ModalCreatePub from "./ModalCreatePub/ModalCreatePub";
 import { dataObject } from "../../../GlobalInterfaces/AuthContextInterfaces";
 
@@ -27,7 +27,7 @@ const CreatePubs = () => {
     setUserAuth(auth);
   }, []);
 
-  const { data: CurrentUser }: IuserData = useSWR(
+  const { data: CurrentUser }: IuserData = useSWR<user>(
     () => `http://localhost:5000/api/user/singleU/${userAuth.user.id}`
   );
 
@@ -37,7 +37,15 @@ const CreatePubs = () => {
     <>
       <CreatePubHero
         topMargin={router.pathname.includes("/home") ? "1.8rem" : "0rem"}
-        theWidth={router.pathname.includes("/home") ? mobileScreen ? "100%" : '90%' : mobileScreen ? "100%" : '96%'}
+        theWidth={
+          router.pathname.includes("/home")
+            ? mobileScreen
+              ? "100%"
+              : "90%"
+            : mobileScreen
+            ? "100%"
+            : "96%"
+        }
       >
         <CreatePubInitial justify="space-between">
           <CreatePubContainPerfil>

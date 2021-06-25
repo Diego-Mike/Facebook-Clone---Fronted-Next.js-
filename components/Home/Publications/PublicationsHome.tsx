@@ -4,13 +4,16 @@ import axios from "axios";
 import useSWR from "swr";
 
 import Pubs from "../../Pubs/Pubs/Pubs";
-import { thePublication } from "../../../GlobalInterfaces/DataInterfaces";
+import {
+  thePublication,
+  Ipublication
+} from "../../../GlobalInterfaces/DataInterfaces";
 import CreatePubs from "../../Pubs/CreatePubs/CreatePubs";
 
 const PublicationsHome = ({ data: allPubs }) => {
   // All pubs
 
-  const { data: Publications }: thePublication = useSWR(
+  const { data: Publications }: thePublication = useSWR<Ipublication>(
     `${process.env.URL}/api/publication`,
     {
       initialData: allPubs,

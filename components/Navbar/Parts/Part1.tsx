@@ -31,7 +31,7 @@ import {
 } from "../NavbarStyled";
 import DefaultUser from "../../../public/defaultUser.svg";
 import { dataObject } from "../../../GlobalInterfaces/AuthContextInterfaces";
-import { multipleUsers } from "../../../GlobalInterfaces/DataInterfaces";
+import { multipleUsers, user } from "../../../GlobalInterfaces/DataInterfaces";
 
 interface IPart1Props {
   searchBar: boolean;
@@ -58,7 +58,7 @@ const Part1: React.FC<IPart1Props> = ({
     setUserId(auth);
   }, []);
 
-  const { data }: multipleUsers = useSWR(
+  const { data }: multipleUsers = useSWR<user[]>(
     () => `${process.env.URL}/api/user/allU/${userId.user.id}`,
     { revalidateOnFocus: false }
   );

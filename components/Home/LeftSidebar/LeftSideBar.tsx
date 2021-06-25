@@ -22,7 +22,7 @@ interface IleftSideBarProps {
 const LeftSideBar: React.FC<IleftSideBarProps> = ({ UserId }) => {
   const [modalCreate, setModalCreate] = useState<boolean>(false);
 
-  const { data } = useSWR<user>(
+  const { data }: IuserData = useSWR<user>(
     () => `${process.env.URL}/api/user/singleU/${UserId.user.id}`
   );
 
