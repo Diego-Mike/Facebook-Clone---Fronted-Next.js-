@@ -82,9 +82,9 @@ const CreateComments: React.FC<IcreateComments> = ({ publication }) => {
             }
           }
         },
-        false
-      );
-    } else {
+        fals e 
+      );  
+    } else   {
       mutate(
         `${URL}/api/publication`,
         (allPubs: Ipublication[]) => {
@@ -135,8 +135,10 @@ const CreateComments: React.FC<IcreateComments> = ({ publication }) => {
 
           return updatePub;
         } catch (err) {
-          router.push("/");
-          router.push("/home");
+          if (err) {
+            router.push("/");
+            router.push("/home");
+          }
         }
       },
       false
@@ -196,8 +198,10 @@ const CreateComments: React.FC<IcreateComments> = ({ publication }) => {
 
           return updatePub;
         } catch (err) {
+          if(err){
           router.push("/");
           router.push("/home");
+          }
         }
       },
       false

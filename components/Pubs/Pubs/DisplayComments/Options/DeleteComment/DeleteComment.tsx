@@ -82,8 +82,10 @@ const DeleteComment: React.FC<IDeleteComment> = ({
 
           return updatePub;
         } catch (err) {
-          router.push("/");
-          router.push("/home");
+          if (err) {
+            router.push("/");
+            router.push("/home");
+          }
         }
       },
       false
