@@ -11,7 +11,7 @@ import {
   LeftSideBarCreateIcon
 } from "./LeftSideBarStyled";
 import { dataObject } from "../../../GlobalInterfaces/AuthContextInterfaces";
-import { IuserData } from "../../../GlobalInterfaces/DataInterfaces";
+import { IuserData, user } from "../../../GlobalInterfaces/DataInterfaces";
 import DefaultUser from "../../../public/defaultUser.svg";
 import ModalCreatePub from "../../Pubs/CreatePubs/ModalCreatePub/ModalCreatePub";
 
@@ -22,7 +22,7 @@ interface IleftSideBarProps {
 const LeftSideBar: React.FC<IleftSideBarProps> = ({ UserId }) => {
   const [modalCreate, setModalCreate] = useState<boolean>(false);
 
-  const { data } = useSWR<IuserData>(
+  const { data } = useSWR<user>(
     () => `${process.env.URL}/api/user/singleU/${UserId.user.id}`
   );
 
