@@ -6,7 +6,7 @@ import useSWR from "swr";
 import Private from "../components/Private/Private";
 import LookForFriends from "../components/Friends/LookForFriends";
 import { dataObject } from "../GlobalInterfaces/AuthContextInterfaces";
-import { user } from "../GlobalInterfaces/DataInterfaces";
+import { user, multipleUsers } from "../GlobalInterfaces/DataInterfaces";
 import { GetStaticProps } from "next";
 
 const Friends = ({ initialAllUsers }) => {
