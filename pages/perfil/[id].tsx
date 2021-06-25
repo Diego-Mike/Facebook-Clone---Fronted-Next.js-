@@ -114,7 +114,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   );
 
   return {
-    props: { data, allPubs }
+    props: { data, allPubs },
+    revalidate: 5
   };
 };
 

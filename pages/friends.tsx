@@ -52,7 +52,8 @@ export const getStaticProps: GetStaticProps = async () => {
   );
 
   return {
-    props: { initialAllUsers }
+    props: { initialAllUsers },
+    revalidate: 5
   };
 };
 

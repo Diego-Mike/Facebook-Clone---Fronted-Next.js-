@@ -65,7 +65,8 @@ export const getStaticProps: GetStaticProps = async () => {
   const { data } = await axios.get(`${process.env.URL}/api/publication`);
 
   return {
-    props: { data }
+    props: { data },
+    revalidate: 5
   };
 };
 
