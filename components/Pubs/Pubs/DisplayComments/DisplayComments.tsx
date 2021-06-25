@@ -82,7 +82,7 @@ const CreateComments: React.FC<IcreateComments> = ({ publication }) => {
             }
           }
         },
-        false
+        false 
       );
     } else {
       mutate(
