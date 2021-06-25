@@ -1,26 +1,17 @@
 import styles from "styled-components";
-import { GetStaticProps } from "next";
 import axios from "axios";
 import useSWR from "swr";
+import { FC } from "react";
 
 import Pubs from "../../Pubs/Pubs/Pubs";
-import {
-  thePublication,
-  Ipublication
-} from "../../../GlobalInterfaces/DataInterfaces";
+import { Ipublication } from "../../../GlobalInterfaces/DataInterfaces";
 import CreatePubs from "../../Pubs/CreatePubs/CreatePubs";
 
-const PublicationsHome = ({ data: allPubs }) => {
-  // All pubs
+interface IPubHome {
+  Publications: Ipublication[];
+}
 
-  const { data: Publications } = useSWR<Ipublication[]>(
-    `${process.env.URL}/api/publication`,
-    {
-      initialData: allPubs,
-      revalidateOnFocus: false
-    }
-  );
-
+const PublicationsHome: FC<IPubHome> = ({ Publications }) => {
   // Responsive
 
   const PublicationResponsive = {
@@ -117,14 +108,6 @@ ${PublicationResponsive.responsive9}{
       )}
     </>
   );
-};
-
-export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await axios.get(`${process.env.URL}/api/publication`);
-
-  return {
-    props: data
-  };
 };
 
 export default PublicationsHome;
