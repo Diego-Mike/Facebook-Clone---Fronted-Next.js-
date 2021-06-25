@@ -30,7 +30,8 @@ import UpdatePerfil from "./UpdatePerfilModal/UpdatePerfil";
 import {
   AddNotification,
   DeleteNotificationOrFriend,
-  AddAsFriend
+  AddAsFriend,
+  URL
 } from "../../API/Calls";
 
 interface IperfilOptions {
@@ -61,13 +62,13 @@ const PerfilOptions: React.FC<IperfilOptions> = ({
   }, []);
 
   const { data: userOnScreen } = useSWR<user>(
-    () => `${process.env.URL}/api/user/singleU/${userAuth.user.id}`
+    () => `${URL}/api/user/singleU/${userAuth.user.id}`
   );
 
   const AddFriend = async (): Promise<void> => {
     try {
       mutate(
-        `${process.env.URL}/api/user/singleU/${perfilId._id}`,
+        `${URL}/api/user/singleU/${perfilId._id}`,
         (visitedPerfil: user) => {
           if (visitedPerfil) {
             const friends = [
@@ -94,7 +95,7 @@ const PerfilOptions: React.FC<IperfilOptions> = ({
       );
 
       mutate(
-        `${process.env.URL}/api/user/singleU/${userOnScreen._id}`,
+        `${URL}/api/user/singleU/${userOnScreen._id}`,
         (userAtScreen: user) => {
           if (userAtScreen) {
             const findFriend = userAtScreen.friends.find(
@@ -115,13 +116,13 @@ const PerfilOptions: React.FC<IperfilOptions> = ({
 
       await AddAsFriend({ userId: perfilId._id }, userAuth.user.id);
 
-      mutate(`${process.env.URL}/api/user/singleU/${userOnScreen._id}`);
-      mutate(`${process.env.URL}/api/user/singleU/${perfilId._id}`);
+      mutate(`${URL}/api/user/singleU/${userOnScreen._id}`);
+      mutate(`${URL}/api/user/singleU/${perfilId._id}`);
     } catch (err) {
       if (err) {
         // If error, revalidate cache
-        mutate(`${process.env.URL}/api/user/singleU/${userOnScreen._id}`);
-        mutate(`${process.env.URL}/api/user/singleU/${perfilId._id}`);
+        mutate(`${URL}/api/user/singleU/${userOnScreen._id}`);
+        mutate(`${URL}/api/user/singleU/${perfilId._id}`);
       }
     }
   };
@@ -131,7 +132,7 @@ const PerfilOptions: React.FC<IperfilOptions> = ({
       // Mutate cache to add notification
 
       mutate(
-        `${process.env.URL}/api/user/singleU/${perfilId._id}`,
+        `${URL}/api/user/singleU/${perfilId._id}`,
         (visitedPerfil: user) => {
           if (visitedPerfil) {
             const friends = [
@@ -159,13 +160,13 @@ const PerfilOptions: React.FC<IperfilOptions> = ({
         await AddNotification({ userId: perfilId._id }, userAuth.user.id);
       // Trigger to make sure the data is right
 
-      mutate(`${process.env.URL}/api/user/singleU/${userOnScreen._id}`);
-      mutate(`${process.env.URL}/api/user/singleU/${perfilId._id}`);
+      mutate(`${URL}/api/user/singleU/${userOnScreen._id}`);
+      mutate(`${URL}/api/user/singleU/${perfilId._id}`);
     } catch (err) {
       if (err) {
         // If error, revalidate cache
-        mutate(`${process.env.URL}/api/user/singleU/${userOnScreen._id}`);
-        mutate(`${process.env.URL}/api/user/singleU/${perfilId._id}`);
+        mutate(`${URL}/api/user/singleU/${userOnScreen._id}`);
+        mutate(`${URL}/api/user/singleU/${perfilId._id}`);
       }
     }
   };
@@ -178,7 +179,7 @@ const PerfilOptions: React.FC<IperfilOptions> = ({
         userOnScreen.friends.find(f => f.identifier === perfilId._id)
       ) {
         mutate(
-          `${process.env.URL}/api/user/singleU/${perfilId._id}`,
+          `${URL}/api/user/singleU/${perfilId._id}`,
           (visitedPerfil: user) => {
             if (visitedPerfil) {
               const friends = visitedPerfil.friends.filter(
@@ -193,7 +194,7 @@ const PerfilOptions: React.FC<IperfilOptions> = ({
           false
         );
         mutate(
-          `${process.env.URL}/api/user/singleU/${userOnScreen._id}`,
+          `${URL}/api/user/singleU/${userOnScreen._id}`,
           (userAtScreen: user) => {
             if (userAtScreen) {
               const friends = userAtScreen.friends.filter(
@@ -215,7 +216,7 @@ const PerfilOptions: React.FC<IperfilOptions> = ({
         !userOnScreen.friends.find(f => f.identifier === perfilId._id)
       ) {
         mutate(
-          `${process.env.URL}/api/user/singleU/${perfilId._id}`,
+          `${URL}/api/user/singleU/${perfilId._id}`,
 
           (visitedPerfil: user) => {
             if (visitedPerfil) {
@@ -235,7 +236,7 @@ const PerfilOptions: React.FC<IperfilOptions> = ({
         !perfilId.friends.find(f => f.identifier === userOnScreen._id)
       ) {
         mutate(
-          `${process.env.URL}/api/user/singleU/${userOnScreen._id}`,
+          `${URL}/api/user/singleU/${userOnScreen._id}`,
           (userAtScreen: user) => {
             if (userAtScreen) {
               const friends = userAtScreen.friends.filter(
@@ -256,13 +257,13 @@ const PerfilOptions: React.FC<IperfilOptions> = ({
         userAuth.user.id
       );
 
-      mutate(`${process.env.URL}/api/user/singleU/${userOnScreen._id}`);
-      mutate(`${process.env.URL}/api/user/singleU/${perfilId._id}`);
+      mutate(`${URL}/api/user/singleU/${userOnScreen._id}`);
+      mutate(`${URL}/api/user/singleU/${perfilId._id}`);
     } catch (err) {
       // If error, revalidate cache
       if (err) {
-        mutate(`${process.env.URL}/api/user/singleU/${userOnScreen._id}`);
-        mutate(`${process.env.URL}/api/user/singleU/${perfilId._id}`);
+        mutate(`${URL}/api/user/singleU/${userOnScreen._id}`);
+        mutate(`${URL}/api/user/singleU/${perfilId._id}`);
       }
     }
   };

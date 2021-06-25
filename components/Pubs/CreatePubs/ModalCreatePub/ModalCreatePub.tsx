@@ -23,7 +23,7 @@ import {
   CreatePublicationPhotoVideo
 } from "../CreatepubStyled";
 import { Ipublication } from "../../../../GlobalInterfaces/DataInterfaces";
-import { makePublication } from "../../../../API/Calls";
+import { makePublication, URL } from "../../../../API/Calls";
 
 interface ImodalCreatePub {
   setModalCreate: React.Dispatch<SetStateAction<boolean>>;
@@ -36,7 +36,6 @@ const ModalCreatePub: React.FC<ImodalCreatePub> = ({
   CurrentUserName,
   UserId
 }) => {
-
   const [newPublication, setNewPublication] = useState({
     body: "",
     photo: "",
@@ -51,7 +50,7 @@ const ModalCreatePub: React.FC<ImodalCreatePub> = ({
       e.preventDefault();
 
       mutate(
-        `${process.env.URL}/api/publication`,
+        `${URL}/api/publication`,
         (allPublications: Ipublication[]) => {
           if (allPublications) {
             const newPub: Ipublication[] = [
@@ -79,9 +78,9 @@ const ModalCreatePub: React.FC<ImodalCreatePub> = ({
 
       await makePublication(newPublication);
 
-      mutate(`${process.env.URL}/api/publication`);
+      mutate(`${URL}/api/publication`);
     } catch (err) {
-      mutate(`${process.env.URL}/api/publication`);
+      mutate(`${URL}/api/publication`);
       console.log(err);
     }
   };

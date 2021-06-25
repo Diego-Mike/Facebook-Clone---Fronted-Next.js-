@@ -32,6 +32,7 @@ import {
 import DefaultUser from "../../../public/defaultUser.svg";
 import { dataObject } from "../../../GlobalInterfaces/AuthContextInterfaces";
 import { multipleUsers, user } from "../../../GlobalInterfaces/DataInterfaces";
+import { URL } from "../../../API/Calls";
 
 interface IPart1Props {
   searchBar: boolean;
@@ -59,7 +60,7 @@ const Part1: React.FC<IPart1Props> = ({
   }, []);
 
   const { data } = useSWR<user[]>(
-    () => `${process.env.URL}/api/user/allU/${userId.user.id}`,
+    () => `${URL}/api/user/allU/${userId.user.id}`,
     { revalidateOnFocus: false }
   );
 

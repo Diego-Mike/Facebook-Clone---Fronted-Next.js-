@@ -12,6 +12,7 @@ import {
 } from "./RightSideBarStyled";
 import { IuserData, user } from "../../../GlobalInterfaces/DataInterfaces";
 import DefaultUser from "../../../public/defaultUser.svg";
+import { URL } from "../../../API/Calls";
 
 interface IrightSideBarProps {
   UserId: dataObject;
@@ -21,7 +22,7 @@ const RightSideBart: React.FC<IrightSideBarProps> = ({ UserId }) => {
   const router = useRouter();
 
   const { data: DataUser } = useSWR<user>(
-    () => `${process.env.URL}/api/user/singleU/${UserId.user.id}`
+    () => `${URL}/api/user/singleU/${UserId.user.id}`
   );
 
   // Framer motion

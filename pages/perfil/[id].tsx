@@ -18,6 +18,7 @@ import PerfilOptions from "../../components/Perfil/PerfilOptions";
 import PerfilPublications from "../../components/Perfil/PerfilPublications";
 import { dataObject } from "../../GlobalInterfaces/AuthContextInterfaces";
 import PerfilFriends from "../../components/Perfil/PerfilFriends";
+import { URL } from "../../API/Calls";
 
 const Perfil = ({ data: urlIdData, allPubs }) => {
   const [userAuth, setUserAuth] = useState<dataObject>({});
@@ -32,15 +33,12 @@ const Perfil = ({ data: urlIdData, allPubs }) => {
     setUserAuth(auth);
   }, []);
 
-  const { data } = useSWR<user>(
-    `${process.env.URL}/api/user/singleU/${router}`,
-    {
-      initialData: urlIdData
-    }
-  );
+  const { data } = useSWR<user>(`${URL}/api/user/singleU/${router}`, {
+    initialData: urlIdData
+  });
 
   const { data: Publications } = useSWR<Ipublication[]>(
-    `${process.env.URL}/api/publication`,
+    `${URL}/api/publication`,
     {
       initialData: allPubs,
       revalidateOnFocus: false

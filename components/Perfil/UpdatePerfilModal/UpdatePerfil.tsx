@@ -17,7 +17,7 @@ import {
   ContainBannerPhoto
 } from "../../../styled-pages/PerfilStyled";
 import { user } from "../../../GlobalInterfaces/DataInterfaces";
-import { updatePerfilPhotos } from "../../../API/Calls";
+import { updatePerfilPhotos, URL } from "../../../API/Calls";
 
 interface IupdateProps {
   setUpdatePerfil: React.Dispatch<SetStateAction<boolean>>;
@@ -36,7 +36,7 @@ const UpdatePerfil: React.FC<IupdateProps> = ({
   const update = async () => {
     document.body.style.overflow = "auto";
     mutate(
-      `${process.env.URL}/api/user/singleU/` + perfilPhotos._id,
+      `${URL}/api/user/singleU/` + perfilPhotos._id,
       {
         ...perfilPhotos,
         perfil:
@@ -50,7 +50,7 @@ const UpdatePerfil: React.FC<IupdateProps> = ({
     );
     setUpdatePerfil(false);
     await updatePerfilPhotos(updatePhotos, perfilPhotos._id);
-    mutate(`${process.env.URL}/api/user/singleU/` + perfilPhotos._id);
+    mutate(`${URL}/api/user/singleU/` + perfilPhotos._id);
   };
 
   const cutText = useMediaQuery({ query: "(max-width: 500px)" });

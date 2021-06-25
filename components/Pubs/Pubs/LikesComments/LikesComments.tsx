@@ -14,7 +14,7 @@ import {
 } from "../PubsStyled";
 import Like from "../../../../public/like.svg";
 import { dataObject } from "../../../../GlobalInterfaces/AuthContextInterfaces";
-import { like } from "../../../../API/Calls";
+import { like, URL } from "../../../../API/Calls";
 
 interface IlikesCommentsProps {
   publication: Ipublication;
@@ -34,7 +34,7 @@ const LikesComments: React.FC<IlikesCommentsProps> = ({ publication }) => {
     // Update cache locally
     if (publication.likes.find(f => f.identifier === userAuth.user.id)) {
       mutate(
-        `${process.env.URL}/api/publication`,
+        `${URL}/api/publication`,
         (allPublications: Ipublication[]) => {
           if (allPublications) {
             const currentPub = allPublications.find(f => f === publication);
@@ -56,7 +56,7 @@ const LikesComments: React.FC<IlikesCommentsProps> = ({ publication }) => {
       );
     } else {
       mutate(
-        `${process.env.URL}/api/publication`,
+        `${URL}/api/publication`,
         (allPublications: Ipublication[]) => {
           if (allPublications) {
             const currentPub = allPublications.find(f => f === publication);
@@ -84,7 +84,7 @@ const LikesComments: React.FC<IlikesCommentsProps> = ({ publication }) => {
 
     // Check cache data is right
     mutate(
-      `${process.env.URL}/api/publication`,
+      `${URL}/api/publication`,
       async (allPublications: Ipublication[]) => {
         try {
           const { data } = await like(

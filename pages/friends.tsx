@@ -8,6 +8,7 @@ import LookForFriends from "../components/Friends/LookForFriends";
 import { dataObject } from "../GlobalInterfaces/AuthContextInterfaces";
 import { user, multipleUsers } from "../GlobalInterfaces/DataInterfaces";
 import { GetStaticProps } from "next";
+import { URL } from "../API/Calls";
 
 const Friends = ({ initialAllUsers }) => {
   const [userAuth, setUserAuth] = useState({});
@@ -19,12 +20,9 @@ const Friends = ({ initialAllUsers }) => {
 
   // All users and user on screen
 
-  const { data: AllUsers } = useSWR<user[]>(
-    () => `${process.env.URL}/api/user`,
-    {
-      initialData: initialAllUsers
-    }
-  );
+  const { data: AllUsers } = useSWR<user[]>(() => `${URL}/api/user`, {
+    initialData: initialAllUsers
+  });
 
   return (
     <>

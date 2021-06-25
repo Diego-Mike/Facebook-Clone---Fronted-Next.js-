@@ -28,7 +28,7 @@ import {
 import DefaultUser from "../../../../public/defaultUser.svg";
 import { dataObject } from "../../../../GlobalInterfaces/AuthContextInterfaces";
 import Like from "../../../../public/like.svg";
-import { likeComment, createComment } from "../../../../API/Calls";
+import { likeComment, createComment, URL } from "../../../../API/Calls";
 import CommentOptions from "./Options/CommentOptions";
 
 interface IcreateComments {
@@ -56,7 +56,7 @@ const CreateComments: React.FC<IcreateComments> = ({ publication }) => {
       )
     ) {
       mutate(
-        `${process.env.URL}/api/publication`,
+        `${URL}/api/publication`,
         (allPubs: Ipublication[]) => {
           if (allPubs) {
             const currentPub = allPubs.find(f => f === publication);
@@ -86,7 +86,7 @@ const CreateComments: React.FC<IcreateComments> = ({ publication }) => {
       );
     } else {
       mutate(
-        `${process.env.URL}/api/publication`,
+        `${URL}/api/publication`,
         (allPubs: Ipublication[]) => {
           if (allPubs) {
             const currentPub = allPubs.find(f => f === publication);
@@ -118,7 +118,7 @@ const CreateComments: React.FC<IcreateComments> = ({ publication }) => {
     // Check cache data is right
 
     mutate(
-      `${process.env.URL}/api/publication`,
+      `${URL}/api/publication`,
       async (allPubs: Ipublication[]) => {
         try {
           const { data } = await likeComment(
@@ -149,7 +149,7 @@ const CreateComments: React.FC<IcreateComments> = ({ publication }) => {
     e.preventDefault();
 
     mutate(
-      `${process.env.URL}/api/publication`,
+      `${URL}/api/publication`,
       (allPubs: Ipublication[]) => {
         if (allPubs) {
           const currentPub = allPubs.find(f => f === publication);
@@ -158,22 +158,22 @@ const CreateComments: React.FC<IcreateComments> = ({ publication }) => {
             const updatePub = allPubs.map(pub =>
               pub._id === currentPub._id
                 ? {
-                  ...currentPub,
-                  comments: [
-                    {
-                      body: commentBody,
-                      createdAt: new Date().toISOString(),
-                      identifier: userAuth.user.id,
-                      name: userAuth.user.name
-                    },
-                    ...currentPub.comments
-                  ]
-                }
+                    ...currentPub,
+                    comments: [
+                      {
+                        body: commentBody,
+                        createdAt: new Date().toISOString(),
+                        identifier: userAuth.user.id,
+                        name: userAuth.user.name
+                      },
+                      ...currentPub.comments
+                    ]
+                  }
                 : pub
             );
 
             return updatePub;
-      }
+          }
         }
       },
       false
@@ -181,7 +181,7 @@ const CreateComments: React.FC<IcreateComments> = ({ publication }) => {
     setCommentBody("");
 
     mutate(
-      `${process.env.URL}/api/publication`,
+      `${URL}/api/publication`,
 
       async (allPubs: Ipublication[]) => {
         try {
@@ -189,8 +189,6 @@ const CreateComments: React.FC<IcreateComments> = ({ publication }) => {
             { identifier: userAuth.user.id, body: commentBody },
             publication._id
           );
-
-          
 
           const updatePub = allPubs.map(pub =>
             pub._id === data._id ? data : pub

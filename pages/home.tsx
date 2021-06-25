@@ -11,6 +11,7 @@ import { dataObject } from "../GlobalInterfaces/AuthContextInterfaces";
 import { Ipublication } from "../GlobalInterfaces/DataInterfaces";
 import RightSideBar from "../components/Home/RightSideBar/RightSideBar";
 import PublicationsHome from "../components/Home/Publications/PublicationsHome";
+import { URL } from "../API/Calls";
 
 const Home = ({ data: allPubs }) => {
   const [userAuth, setUserAuth] = useState<dataObject>({});
@@ -23,7 +24,7 @@ const Home = ({ data: allPubs }) => {
   // All pubs
 
   const { data: Publications } = useSWR<Ipublication[]>(
-    `${process.env.URL}/api/publication`,
+    `${URL}/api/publication`,
     {
       initialData: allPubs,
       revalidateOnFocus: false

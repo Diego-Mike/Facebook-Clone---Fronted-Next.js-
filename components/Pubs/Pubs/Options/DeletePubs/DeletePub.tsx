@@ -11,7 +11,7 @@ import {
   DeletePubButtons,
   DeleteButton
 } from "./DeletePubStyled";
-import { deletePublication } from "../../../../../API/Calls";
+import { deletePublication, URL } from "../../../../../API/Calls";
 import { Ipublication } from "../../../../../GlobalInterfaces/DataInterfaces";
 
 interface IdeletePub {
@@ -28,7 +28,7 @@ const DeletePub: React.FC<IdeletePub> = ({
   const DeletePub = async (): Promise<void> => {
     try {
       mutate(
-        `${process.env.URL}/api/publication`,
+        `${URL}/api/publication`,
         (allPublications: Ipublication[]) => {
           if (allPublications) {
             const deleteThePub: Ipublication[] = allPublications.filter(
@@ -46,9 +46,9 @@ const DeletePub: React.FC<IdeletePub> = ({
 
       await deletePublication({ data: { identifier: UserId } }, pubId);
 
-      mutate(`${process.env.URL}/api/publication`);
+      mutate(`${URL}/api/publication`);
     } catch (err) {
-      mutate(`${process.env.URL}/api/publication`);
+      mutate(`${URL}/api/publication`);
     }
   };
 

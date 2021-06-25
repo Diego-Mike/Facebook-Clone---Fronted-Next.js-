@@ -12,7 +12,7 @@ import {
   DeleteButton
 } from "../../../Options/DeletePubs/DeletePubStyled";
 import { Ipublication } from "../../../../../../GlobalInterfaces/DataInterfaces";
-import { deleteComment } from "../../../../../../API/Calls";
+import { deleteComment, URL } from "../../../../../../API/Calls";
 
 interface IDeleteComment {
   UserId: string;
@@ -37,7 +37,7 @@ const DeleteComment: React.FC<IDeleteComment> = ({
 
   const DeleteComment = (): void => {
     mutate(
-      `${process.env.URL}/api/publication`,
+      `${URL}/api/publication`,
       (allPublications: Ipublication[]) => {
         if (allPublications) {
           const currentPub = allPublications.find(({ _id }) => _id === pubId);
@@ -63,7 +63,7 @@ const DeleteComment: React.FC<IDeleteComment> = ({
       setDeleteComment(false);
 
     mutate(
-      `${process.env.URL}/api/publication`,
+      `${URL}/api/publication`,
       async (allPubs: Ipublication[]) => {
         try {
           const { data: newPub } = await deleteComment(

@@ -22,7 +22,7 @@ import {
   DeletePubButtons,
   DeletePubText
 } from "../../../Options/DeletePubs/DeletePubStyled";
-import { editComment } from "../../../../../../API/Calls";
+import { editComment, URL } from "../../../../../../API/Calls";
 
 interface IEditComment {
   setModalOptions: Dispatch<SetStateAction<boolean>>;
@@ -49,7 +49,7 @@ const EditComment: FC<IEditComment> = ({
 
   const HandleEditComment = async (): Promise<void> => {
     mutate(
-      `${process.env.URL}/api/publication`,
+      `${URL}/api/publication`,
       (allPubs: Ipublication[]) => {
         if (allPubs) {
           const currentPub = allPubs.find(f => f === Publication);
@@ -83,7 +83,7 @@ const EditComment: FC<IEditComment> = ({
       setEditComment(false);
 
     mutate(
-      `${process.env.URL}/api/publication`,
+      `${URL}/api/publication`,
       async (allPubs: Ipublication[]) => {
         try {
           const { data } = await editComment(

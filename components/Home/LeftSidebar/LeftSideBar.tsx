@@ -14,6 +14,7 @@ import { dataObject } from "../../../GlobalInterfaces/AuthContextInterfaces";
 import { IuserData, user } from "../../../GlobalInterfaces/DataInterfaces";
 import DefaultUser from "../../../public/defaultUser.svg";
 import ModalCreatePub from "../../Pubs/CreatePubs/ModalCreatePub/ModalCreatePub";
+import { URL } from "../../../API/Calls";
 
 interface IleftSideBarProps {
   UserId: dataObject;
@@ -23,7 +24,7 @@ const LeftSideBar: React.FC<IleftSideBarProps> = ({ UserId }) => {
   const [modalCreate, setModalCreate] = useState<boolean>(false);
 
   const { data } = useSWR<user>(
-    () => `${process.env.URL}/api/user/singleU/${UserId.user.id}`
+    () => `${URL}/api/user/singleU/${UserId.user.id}`
   );
 
   const router = useRouter();

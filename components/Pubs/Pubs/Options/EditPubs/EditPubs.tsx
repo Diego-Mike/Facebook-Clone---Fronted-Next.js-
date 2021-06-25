@@ -25,7 +25,7 @@ import {
   SubmitPublication
 } from "../../../CreatePubs/CreatepubStyled";
 import { Ipublication } from "../../../../../GlobalInterfaces/DataInterfaces";
-import { editPub } from "../../../../../API/Calls";
+import { editPub, URL } from "../../../../../API/Calls";
 
 interface IEditPubs {
   identifier: string;
@@ -50,7 +50,7 @@ const EditPubs: FC<IEditPubs> = ({
 
   const handleSubmit = async (): Promise<void> => {
     mutate(
-      `${process.env.URL}/api/publication`,
+      `${URL}/api/publication`,
       (allPubs: Ipublication[]) => {
         if (allPubs) {
           const currentPub = allPubs.find(f => f === publication);
@@ -79,7 +79,7 @@ const EditPubs: FC<IEditPubs> = ({
     // Check cache data is right
 
     mutate(
-      `${process.env.URL}/api/publication`,
+      `${URL}/api/publication`,
       async (allPubs: Ipublication[]) => {
         try {
           const { data } = await editPub(editThePublication, publication._id);

@@ -43,7 +43,7 @@ import DefaultUser from "../../../public/defaultUser.svg";
 import { IuserData, user } from "../../../GlobalInterfaces/DataInterfaces";
 import { useState, useEffect, SetStateAction, SyntheticEvent } from "react";
 import { AuthActions } from "../../../context/AuthContext";
-import { DeleteNotificationOrFriend, AddAsFriend } from "../../../API/Calls";
+import { DeleteNotificationOrFriend, AddAsFriend, URL } from "../../../API/Calls";
 import ModalCreatePub from "../../Pubs/CreatePubs/ModalCreatePub/ModalCreatePub";
 
 interface IPar2Props {
@@ -74,7 +74,7 @@ const Part3: React.FC<IPar2Props> = ({
   }, []);
 
   const { data } = useSWR<user>(
-    () => `${process.env.URL}/api/user/singleU/${userId.user.id}`
+    () => `${URL}/api/user/singleU/${userId.user.id}`
   );
 
   // Logout
@@ -87,13 +87,13 @@ const Part3: React.FC<IPar2Props> = ({
   const AddFriend = async (acceptFriend: string): Promise<void> => {
     try {
       await AddAsFriend({ userId: acceptFriend }, userId.user.id);
-      mutate(`${process.env.URL}/api/user/singleU/${userId.user.id}`);
-      mutate(`${process.env.URL}/api/user/singleU/${acceptFriend}`);
+      mutate(`${URL}/api/user/singleU/${userId.user.id}`);
+      mutate(`${URL}/api/user/singleU/${acceptFriend}`);
       setNotifications(false);
     } catch (err) {
       if (err) {
-        mutate(`${process.env.URL}/api/user/singleU/${userId.user.id}`);
-        mutate(`${process.env.URL}/api/user/singleU/${acceptFriend}`);
+        mutate(`${URL}/api/user/singleU/${userId.user.id}`);
+        mutate(`${URL}/api/user/singleU/${acceptFriend}`);
         setNotifications(false);
       }
     }
@@ -106,12 +106,12 @@ const Part3: React.FC<IPar2Props> = ({
         { data: { userId: rejectUserId } },
         userId.user.id
       );
-      mutate(`${process.env.URL}/api/user/singleU/${userId.user.id}`);
+      mutate(`${URL}/api/user/singleU/${userId.user.id}`);
       setNotifications(false);
     } catch (err) {
       // If error, re-validate cache
       if (err) {
-        mutate(`${process.env.URL}/api/user/singleU/${userId.user.id}`);
+        mutate(`${URL}/api/user/singleU/${userId.user.id}`);
         setNotifications(false);
       }
     }
