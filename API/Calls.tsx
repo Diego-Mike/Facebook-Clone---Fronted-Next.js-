@@ -1,6 +1,8 @@
 import axios, { AxiosRequestConfig } from "axios";
 
-const API = axios.create({ baseURL: `${process.env.URL}/api` });
+const URL = process.env.URL || "https://facebook-project-ts.herokuapp.com";
+
+const API = axios.create({ baseURL: `${URL}/api` });
 
 // Set header for each request to give permission
 
