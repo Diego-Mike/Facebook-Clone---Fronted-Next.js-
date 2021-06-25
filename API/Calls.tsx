@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from "axios";
 
-const API = axios.create({ baseURL: "http://localhost:5000/api" });
+const API = axios.create({ baseURL: `${process.env.URL}/api` });
 
 // Set header for each request to give permission
 
