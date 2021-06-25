@@ -15,6 +15,7 @@ import PhotoVideo from "../../../public/photo-video.svg";
 import { IuserData, user } from "../../../GlobalInterfaces/DataInterfaces";
 import ModalCreatePub from "./ModalCreatePub/ModalCreatePub";
 import { dataObject } from "../../../GlobalInterfaces/AuthContextInterfaces";
+import { URL } from "../../../API/Calls";
 
 const CreatePubs = () => {
   const router = useRouter();
@@ -28,7 +29,7 @@ const CreatePubs = () => {
   }, []);
 
   const { data: CurrentUser } = useSWR<user>(
-    () => `http://localhost:5000/api/user/singleU/${userAuth.user.id}`
+    () => `${URL}/api/user/singleU/${userAuth.user.id}`
   );
 
   const mobileScreen = useMediaQuery({ query: "(max-width: 530px)" });
