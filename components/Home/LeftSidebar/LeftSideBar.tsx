@@ -22,7 +22,7 @@ interface IleftSideBarProps {
 const LeftSideBar: React.FC<IleftSideBarProps> = ({ UserId }) => {
   const [modalCreate, setModalCreate] = useState<boolean>(false);
 
-  const { data: DataUser }: IuserData = useSWR(
+  const { data }: IuserData = useSWR(
     () => `${process.env.URL}/api/user/singleU/${UserId.user.id}`
   );
 
@@ -40,7 +40,7 @@ const LeftSideBar: React.FC<IleftSideBarProps> = ({ UserId }) => {
 
   return (
     <>
-      {DataUser !== undefined ? (
+      {data !== undefined ? (
         <>
           {/* // Go to profile */}
           <LeftSideBarWrapper>
@@ -48,19 +48,19 @@ const LeftSideBar: React.FC<IleftSideBarProps> = ({ UserId }) => {
               variants={Actions}
               whileHover="whileHover"
               whileTap="whileTap"
-              onClick={() => router.push(`/perfil/${DataUser._id}`)}
+              onClick={() => router.push(`/perfil/${data._id}`)}
             >
               <LeftSideBarImg>
-                {DataUser.perfil ? (
+                {data.perfil ? (
                   <div>
-                    <img src={DataUser.perfil} alt="" />
+                    <img src={data.perfil} alt="" />
                   </div>
                 ) : (
                   <DefaultUser style={{ width: "32px", height: "32px" }} />
                 )}
               </LeftSideBarImg>
               <LeftSideBarText>
-                <span>{DataUser.name}</span>
+                <span>{data.name}</span>
               </LeftSideBarText>
             </LeftSideBarContainIcon>
             {/* Go to friends */}
@@ -98,8 +98,8 @@ const LeftSideBar: React.FC<IleftSideBarProps> = ({ UserId }) => {
           {modalCreate && (
             <ModalCreatePub
               setModalCreate={setModalCreate}
-              CurrentUserName={DataUser && DataUser.name}
-              UserId={DataUser && DataUser._id}
+              CurrentUserName={data && data.name}
+              UserId={data && data._id}
             />
           )}
         </>
