@@ -20,7 +20,7 @@ import { dataObject } from "../../GlobalInterfaces/AuthContextInterfaces";
 import PerfilFriends from "../../components/Perfil/PerfilFriends";
 import { URL } from "../../API/Calls";
 
-const Perfil = ({ data: urlIdData, allPubs }) => {
+const Perfil = ({ data: urlIdData }) => {
   const [userAuth, setUserAuth] = useState<dataObject>({});
   const [updatePerfil, setUpdatePerfil] = useState<boolean>(false);
   const [watchPubs, setWatchPubs] = useState<boolean>(true);
@@ -40,14 +40,14 @@ const Perfil = ({ data: urlIdData, allPubs }) => {
   const { data: Publications } = useSWR<Ipublication[]>(
     `${URL}/api/publication`,
     {
-      initialData: allPubs,
+      // initialData: allPubs,
       revalidateOnFocus: false
     }
   );
 
   return (
     <>
-      {userAuth && data && router.isFallback !== true ? (
+      {userAuth && data ? (
         <>
           <Head>
             <title> {data.name} | Facebook </title>
@@ -109,12 +109,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     `${process.env.URL}/api/user/singleU/${params.id}`
   );
 
-  const { data: allPubs } = await Axios.get(
-    `${process.env.URL}/api/publication`
-  );
-
   return {
-    props: { data, allPubs },
+    props: { data },
     revalidate: 3
   };
 };
