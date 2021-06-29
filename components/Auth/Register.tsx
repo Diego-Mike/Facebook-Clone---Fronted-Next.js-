@@ -45,6 +45,7 @@ const Register: React.FC<IrProps> = ({ setRegisterWindow }) => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    setRegisterWindow(false), (document.body.style.overflow = "auto");
     try {
       dispatch({ type: REGISTERLOADING });
 

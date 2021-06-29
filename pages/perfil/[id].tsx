@@ -26,14 +26,14 @@ const Perfil = ({ data: urlIdData, allPubs }) => {
   const [watchPubs, setWatchPubs] = useState<boolean>(true);
   const [watchFriends, setWatchFriends] = useState<boolean>(false);
 
-  const router = useRouter().query.id;
+  const router = useRouter();
 
   useEffect(() => {
     const auth = JSON.parse(localStorage.getItem("Auth"));
     setUserAuth(auth);
   }, []);
 
-  const { data } = useSWR<user>(`${URL}/api/user/singleU/${router}`, {
+  const { data } = useSWR<user>(`${URL}/api/user/singleU/${router.query.id}`, {
     initialData: urlIdData
   });
 
@@ -47,7 +47,7 @@ const Perfil = ({ data: urlIdData, allPubs }) => {
 
   return (
     <>
-      {userAuth && data ? (
+      {userAuth && data && router.isFallback !== true ? (
         <>
           <Head>
             <title> {data.name} | Facebook </title>
