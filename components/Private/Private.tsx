@@ -18,7 +18,7 @@ const Private = () => {
 
   return (
     <PrivateWrapper>
-      <FacebookLogo style={{ width: "90px" }} />
+      <FacebookLogo style={{ width: "75px" }} />
     </PrivateWrapper>
   );
 };

@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useState, useEffect } from "react";
 import useSWR from "swr";
 import axios from "axios";
-import { GetStaticProps } from "next";
+import { GetStaticProps, GetServerSideProps } from "next";
 
 import Private from "../components/Private/Private";
 import LeftSideBar from "../components/Home/LeftSidebar/LeftSideBar";
@@ -12,7 +12,7 @@ import RightSideBar from "../components/Home/RightSideBar/RightSideBar";
 import PublicationsHome from "../components/Home/Publications/PublicationsHome";
 import { URL } from "../API/Calls";
 
-const Home = ({ data: allPubs }) => {
+const Home = () => {
   const [userAuth, setUserAuth] = useState<dataObject>({});
 
   useEffect(() => {
@@ -25,14 +25,14 @@ const Home = ({ data: allPubs }) => {
   const { data: Publications } = useSWR<Ipublication[]>(
     `${URL}/api/publication`,
     {
-      initialData: allPubs,
+      // initialData: allPubs,
       revalidateOnFocus: false
     }
   );
 
   return (
     <div>
-      {userAuth ? (
+      {userAuth && Publications ? (
         <>
           <Head>
             <title>Facebook</title>
@@ -61,13 +61,12 @@ const Home = ({ data: allPubs }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await axios.get(`${process.env.URL}/api/publication`);
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   const { data } = await axios.get(`${process.env.URL}/api/publication`);
 
-  return {
-    props: { data },
-    revalidate: 3
-  };
-};
+//   return {
+//     props: { data }
+//   };
+// };
 
 export default Home;

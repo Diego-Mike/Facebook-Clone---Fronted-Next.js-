@@ -52,10 +52,14 @@ width: 33px;
 `;
 export const FullScreenWrapper = styles(motion.div)`
 
-max-width: 100%;
-max-height: 100%;
+width: 100%;
+height: 100%;
 
 border-radius: 0.4rem;
+
+display: flex;
+align-items: center;
+justify-content: center;
 
 img{
     min-width: 25%;
@@ -64,7 +68,6 @@ img{
     max-height: 100%;
 
     border-radius: 0.4rem;
-    object-fit: cover;
 }
 
 `;

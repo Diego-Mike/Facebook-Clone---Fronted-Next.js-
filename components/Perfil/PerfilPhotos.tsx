@@ -59,7 +59,22 @@ const PerfilPhotos: React.FC<IperfilPhotos> = ({ userPerfil }) => {
 
         {!userPerfil.banner && (
           <ContainBannerPerfil photoStyle="NoBanner">
-            {userPerfil.perfil && <ContainPerfil></ContainPerfil>}
+            {userPerfil.perfil && (
+              <ContainPerfil
+                style={{
+                  backgroundImage: `url(${userPerfil.perfil})`,
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover"
+                }}
+                onClick={(e: MouseEvent) => {
+                  e.stopPropagation();
+                  setScreenPhoto(userPerfil.perfil);
+                  setFullScreen(true);
+                  document.body.style.overflow = "hidden";
+                }}
+              ></ContainPerfil>
+            )}
             {!userPerfil.perfil && (
               <ContainPerfil photoStyle="NoPerfil"></ContainPerfil>
             )}

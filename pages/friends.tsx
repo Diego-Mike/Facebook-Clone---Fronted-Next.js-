@@ -7,10 +7,10 @@ import Private from "../components/Private/Private";
 import LookForFriends from "../components/Friends/LookForFriends";
 import { dataObject } from "../GlobalInterfaces/AuthContextInterfaces";
 import { user, multipleUsers } from "../GlobalInterfaces/DataInterfaces";
-import { GetStaticProps } from "next";
+import { GetStaticProps, GetServerSideProps } from "next";
 import { URL } from "../API/Calls";
 
-const Friends = ({ initialAllUsers }) => {
+const Friends = () => {
   const [userAuth, setUserAuth] = useState({});
 
   useEffect(() => {
@@ -20,13 +20,11 @@ const Friends = ({ initialAllUsers }) => {
 
   // All users and user on screen
 
-  const { data: AllUsers } = useSWR<user[]>(() => `${URL}/api/user`, {
-    initialData: initialAllUsers
-  });
+  const { data: AllUsers } = useSWR<user[]>(() => `${URL}/api/user`);
 
   return (
     <>
-      {userAuth ? (
+      {userAuth && AllUsers ? (
         <>
           <Head>
             <title> Amigos | Facebook </title>
@@ -46,15 +44,14 @@ const Friends = ({ initialAllUsers }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
-  const { data: initialAllUsers }: multipleUsers = await Axios.get(
-    `${process.env.URL}/api/user`
-  );
+// export const getServerSideProps: GetServerSideProps  = async () => {
+//   const { data: initialAllUsers }: multipleUsers = await Axios.get(
+//     `${process.env.URL}/api/user`
+//   );
 
-  return {
-    props: { initialAllUsers },
-    revalidate: 3
-  };
-};
+//   return {
+//     props: { initialAllUsers },
+//   };
+// };
 
 export default Friends;
