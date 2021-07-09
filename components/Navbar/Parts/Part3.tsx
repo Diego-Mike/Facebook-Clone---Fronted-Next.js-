@@ -84,38 +84,40 @@ const Part3: React.FC<IPar2Props> = ({
     router.reload();
   };
 
-  const AddFriend = async (acceptFriend: string): Promise<void> => {
-    try {
-      await AddAsFriend({ userId: acceptFriend }, userId.user.id);
-      mutate(`${URL}/api/user/singleU/${userId.user.id}`);
-      mutate(`${URL}/api/user/singleU/${acceptFriend}`);
-      setNotifications(false);
-    } catch (err) {
-      if (err) {
-        mutate(`${URL}/api/user/singleU/${userId.user.id}`);
-        mutate(`${URL}/api/user/singleU/${acceptFriend}`);
-        setNotifications(false);
-      }
-    }
-  };
+  // New version of the app doesn't allow these options
 
-  const Delete = async (rejectUserId: string): Promise<void> => {
-    // Kill notification
-    try {
-      await DeleteNotificationOrFriend(
-        { data: { userId: rejectUserId } },
-        userId.user.id
-      );
-      mutate(`${URL}/api/user/singleU/${userId.user.id}`);
-      setNotifications(false);
-    } catch (err) {
-      // If error, re-validate cache
-      if (err) {
-        mutate(`${URL}/api/user/singleU/${userId.user.id}`);
-        setNotifications(false);
-      }
-    }
-  };
+  // const AddFriend = async (acceptFriend: string): Promise<void> => {
+  //   try {
+  //     await AddAsFriend({ userId: acceptFriend }, userId.user.id);
+  //     mutate(`${URL}/api/user/singleU/${userId.user.id}`);
+  //     mutate(`${URL}/api/user/singleU/${acceptFriend}`);
+  //     setNotifications(false);
+  //   } catch (err) {
+  //     if (err) {
+  //       mutate(`${URL}/api/user/singleU/${userId.user.id}`);
+  //       mutate(`${URL}/api/user/singleU/${acceptFriend}`);
+  //       setNotifications(false);
+  //     }
+  //   }
+  // };
+
+  // const Delete = async (rejectUserId: string): Promise<void> => {
+  //   // Kill notification
+  //   try {
+  //     await DeleteNotificationOrFriend(
+  //       { data: { userId: rejectUserId } },
+  //       userId.user.id
+  //     );
+  //     mutate(`${URL}/api/user/singleU/${userId.user.id}`);
+  //     setNotifications(false);
+  //   } catch (err) {
+  //     // If error, re-validate cache
+  //     if (err) {
+  //       mutate(`${URL}/api/user/singleU/${userId.user.id}`);
+  //       setNotifications(false);
+  //     }
+  //   }
+  // };
 
   // Framer motion - hover / tap
 
@@ -348,32 +350,10 @@ const Part3: React.FC<IPar2Props> = ({
                                 </span>
                               </TheNotificationDataTitle>
 
-                              <TheNotificationDataOptions
-                                onClick={(e: SyntheticEvent) =>
-                                  e.stopPropagation()
-                                }
-                              >
-                                <TheNotificationDataSpan
-                                  colorStuff="white"
-                                  backgroundStuff="#1877f2"
-                                  paddingStuff="0.6rem 2rem"
-                                  whileTap={{ scale: 0.97 }}
-                                  onClick={() =>
-                                    AddFriend(notification.identifier)
-                                  }
-                                >
-                                  Confirmar
-                                </TheNotificationDataSpan>
-                                <TheNotificationDataSpan
-                                  backgroundStuff="rgba(0, 0, 0, 0.1)"
-                                  paddingStuff="0.6rem 2.5rem"
-                                  whileTap={{ scale: 0.97 }}
-                                  onClick={() =>
-                                    Delete(notification.identifier)
-                                  }
-                                >
-                                  Eliminar
-                                </TheNotificationDataSpan>
+                              <TheNotificationDataOptions position="flex-start">
+                                <NotificationAccepted>
+                                  Solicitud de amistad recibida
+                                </NotificationAccepted>
                               </TheNotificationDataOptions>
                             </TheNotificationData>
                           </TheNotification>
